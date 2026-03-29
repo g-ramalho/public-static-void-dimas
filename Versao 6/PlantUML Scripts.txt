@@ -1,0 +1,122 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Visitante" as visitante
+actor "Cliente" as cliente
+
+package "Visitante e Cliente" {
+  usecase "RF01 - Fazer Login" as UC01
+  usecase "RF02 - Fazer Logout" as UC02
+  usecase "RF03 - Recuperar Senha" as UC03
+  usecase "RF04 - Realizar Cadastro" as UC04
+  usecase "RF05 - Gerenciar Cliente" as UC05
+  usecase "RF06 - Gerenciar Veículo" as UC06
+  usecase "RF10 - Solicitar Agendamento" as UC10
+  usecase "RF11 - Solicitar Alteração de Agendamento" as UC11
+  usecase "RF12 - Cancelar Agendamento" as UC12
+  usecase "RF17 - Realizar Pagamento" as UC17
+  usecase "RF19 - Cancelar Solicitação de Pagamento" as UC19
+  usecase "RF20 - Emitir Nota Fiscal Eletrônica" as UC20 #LightGray
+  usecase "RF21 - Enviar Notificação" as UC21 #LightGray
+}
+
+' Relações dos Atores com os Casos de Uso
+visitante -- UC01
+visitante -- UC03
+visitante -- UC04
+cliente -- UC02
+cliente -- UC05
+cliente -- UC06
+cliente -- UC10
+cliente -- UC11
+cliente -- UC12
+cliente -- UC17
+cliente -- UC19
+
+' Relações de Inclusão e Extensão
+UC03 .> UC01 : <<extend>>
+UC06 .> UC05 : <<extend>>
+UC10 ..> UC21 : <<include>>
+UC11 ..> UC21 : <<include>>
+UC12 ..> UC21 : <<include>>
+UC17 ..> UC20 : <<include>>
+
+@enduml
+
+
+
+
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Funcionário" as funcionario
+actor "Administrador" as admin
+
+package "Funcionário e Administrador" {
+  usecase "RF02 - Fazer Logout" as UC02
+  usecase "RF07 - Gerenciar Serviço" as UC07
+  usecase "RF08 - Confirmar Agendamento" as UC08
+  usecase "RF09 - Gerenciar Horários Disponíveis" as UC09
+  usecase "RF13 - Gerenciar Ordem de Serviço" as UC13
+  usecase "RF14 - Gerenciar Produto e Insumo" as UC14
+  usecase "RF15 - Registrar Entrada de Estoque" as UC15
+  usecase "RF16 - Calcular Baixa de Estoque" as UC16
+  usecase "RF18 - Lançar Pagamento" as UC18
+  usecase "RF20 - Emitir Nota Fiscal Eletrônica" as UC20 #LightGray
+  usecase "RF21 - Enviar Notificação" as UC21 #LightGray
+  usecase "RF22 - Enviar Alerta de Estoque" as UC22 #LightGray
+  usecase "RF23 - Gerar Relatório Operacional" as UC23
+  usecase "RF24 - Gerar Relatório de Faturamento" as UC24
+  usecase "RF25 - Gerenciar Usuário" as UC25
+}
+
+' Relações dos Atores com os Casos de Uso
+funcionario -- UC02
+funcionario -- UC08
+funcionario -- UC13
+funcionario -- UC14
+funcionario -- UC15
+funcionario -- UC16
+funcionario -- UC18
+admin -- UC07
+admin -- UC09
+admin -- UC23
+admin -- UC24
+admin -- UC25
+
+' Relações de Inclusão e Extensão
+UC21 .> UC08 : <<extend>>
+UC21 .> UC09 : <<extend>>
+UC16 .> UC13 : <<extend>>
+UC22 .> UC16 : <<extend>>
+UC18 ..> UC20 : <<include>>
+
+@enduml
+
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Sistema" as sistema
+
+package "Sistema" {
+  usecase "RF18 - Lançar Pagamento" as UC18
+  usecase "RF19 - Cancelar Solicitação de Pagamento" as UC19
+  usecase "RF20 - Emitir Nota Fiscal Eletrônica" as UC20
+  usecase "RF21 - Enviar Notificação" as UC21
+  usecase "RF22 - Enviar Alerta de Estoque" as UC22
+}
+
+' Relações dos Atores com os Casos de Uso
+sistema -- UC18
+sistema -- UC19
+sistema -- UC20
+sistema -- UC21
+sistema -- UC22
+
+' Relações de Inclusão e Extensão
+UC18 ..> UC20 : <<include>>
+
+@enduml
