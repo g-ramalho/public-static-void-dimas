@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Visitante" as visitante
+actor "Usuário" as usuario
+actor "Administrador" as admin
+actor "Cliente" as cliente
+actor "Lavador" as lavador
+actor "Sistema" as sistema
+
+' Generalização e Especialização
+
+visitante <|-- usuario
+usuario <|-- cliente
+usuario <|-- lavador
+cliente <|-- admin
+lavador <|-- admin
+
+package "Sistema New Car" {
+  usecase "RF01 - Fazer Login" as UC01
+  usecase "RF02 - Fazer Logout" as UC02
+  usecase "RF03 - Recuperar Senha" as UC03
+  usecase "RF04 - Gerenciar Cliente" as UC04
+  usecase "RF05 - Gerenciar Veículo" as UC05
+  usecase "RF06 - Gerenciar Serviço" as UC06
+  usecase "RF07 - Gerenciar Agendamento" as UC07
+  usecase "RF08 - Gerenciar Horários" as UC08
+  usecase "RF09 - Gerenciar Ordem de Serviço" as UC09
+  usecase "RF10 - Gerenciar Produto e Insumo" as UC10
+  usecase "RF11 - Registrar Entrada de Estoque" as UC11
+  usecase "RF12 - Calcular Baixa de Estoque" as UC12
+  usecase "RF13 - Gerenciar Pagamento" as UC13
+  usecase "RF14 - Emitir Nota Fiscal" as UC14
+  usecase "RF15 - Enviar Notificação" as UC15
+  usecase "RF16 - Enviar Alerta de Estoque" as UC16
+  usecase "RF17 - Gerar Relatório Operacional" as UC17
+  usecase "RF18 - Gerar Relatório de Faturamento" as UC18
+  usecase "RF19 - Gerenciar lavador" as UC19
+  usecase "RF20 - Geranciar Usuário" as UC20
+}
+
+' Relações dos Atores com os Casos de Uso
+usuario -- UC01
+usuario -- UC03
+cliente -- UC04
+cliente -- UC05
+admin -- UC06
+cliente -- UC07
+admin -- UC08
+lavador -- UC09
+admin -- UC10
+admin -- UC11
+sistema -- UC12
+cliente -- UC13
+sistema -- UC14
+sistema -- UC15
+sistema -- UC16
+admin -- UC17
+admin -- UC18
+admin -- UC19
+visitante -- UC20
+
+' Relações de Inclusão e Extensão
+UC01 <.. UC02 : <<extend>>
+
+@enduml
